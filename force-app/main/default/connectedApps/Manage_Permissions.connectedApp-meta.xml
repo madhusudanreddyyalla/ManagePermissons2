@@ -4,7 +4,6 @@
     <label>Manage Permissions</label>
     <oauthConfig>
         <callbackUrl>https://ceptes322-dev-ed.my.salesforce.com/apex/StoreDestinationOrgCodeVF</callbackUrl>
-        <consumerKey>3MVG9n_HvETGhr3ASxInczvnJhN6svd8EZJOijzvAcXQ1YLVL6pAjBLnsR5zZcdCtmPJLVfn1cXFGJir86NPh</consumerKey>
         <isAdminApproved>false</isAdminApproved>
         <isClientCredentialEnabled>false</isClientCredentialEnabled>
         <isConsumerSecretOptional>false</isConsumerSecretOptional>

@@ -1,0 +1,296 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-13-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+<div class="slds-is-relative">
+    <div class="spinner">
+		<template if:true={isSpinner}>
+			<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+		</template>
+	</div>    
+    <lightning-card variant="Narrow">
+        <div class="slds-var-m-around_xxx-small slds-var-m-*_xxx-small">
+            <lightning-layout-item size="12" small-device-size="1" medium-device-size="12" large-device-size="12">
+                <div class="custom-box">
+                    <template if:true={isObject}>
+                        <c-multi-select-combobox options={getobj}
+                            onselect={buttonSelectObject} selected-values={searchProfilesandPermissionset}
+                            label={labels.SelectObjectLabel}></c-multi-select-combobox>
+                       
+                    </template>
+                </div>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="1" medium-device-size="12" large-device-size="12">
+                <div class="custom-box">
+                    <template if:true={isProfile}>
+                        <c-multi-select-combobox profile="true" multi-select="true"
+                            options={allProfilesandPermissionsetDuplicate} onselect={recordTypeSelect}
+                            selected-values={searchProfilesandPermissionset} label={labels.SelectProfileandPermissionSetLabel}>
+                        </c-multi-select-combobox>
+                     
+                    </template>
+                </div>
+            </lightning-layout-item>
+            </div>
+            <br>
+        <!--Fetch field permissions-->
+        <div class="slds-float_right slds-p-horizontal_small">
+            <lightning-button variant="brand" label = {labels.fetchData} title = {labels.fetchData}
+            onclick={fetchRecordTypePermissions}>
+            </lightning-button>
+        </div>
+		<!--Save field permissions-->
+		<template if:true={isdataFetched}>
+            <div class="slds-float_right slds-p-horizontal_small">
+                <lightning-button variant="brand" label = {labels.saveData} title = {labels.saveData} 
+                onclick={saveRecordTypePermissions} class="slds-p-left_small">
+                </lightning-button>
+             </div>
+		</template><br>
+
+        <lightning-layout-item size="12" padding="around-small" small-device-size="1" medium-device-size="12">
+        	
+        </lightning-layout-item>
+
+    </lightning-card>
+
+    <template if:true={isdataFetched}>
+        <div class="slds-box slds-theme_default">
+            <lightning-card  variant="Narrow">
+                <div class="slds-grid slds-wrap slds-align_absolute-center">
+                    <div class="slds-p-left_x-small slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                         <div class='slds-truncate black'>
+                               <lightning-input type="checkbox" label="Read All" data-scope="Read_ALL" data-objectaccesstype="readAccess"
+					               checked = {readAll} onchange={selectOrDeselectAllPermissions}></lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                        <div class='slds-truncate black'>
+                                <lightning-input type="checkbox" label="Create All" data-scope="Create_ALL" data-objectaccesstype="createAccess"
+					              checked = {createAll} onchange={selectOrDeselectAllPermissions}></lightning-input>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                        <div class='slds-truncate black'>
+                                 <lightning-input type="checkbox" label="Edit All" data-scope="Edit_ALL" data-objectaccesstype="editAccess"
+					                checked = {editAll} onchange={selectOrDeselectAllPermissions}></lightning-input>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                         <div class='slds-truncate black'>
+                                 <lightning-input type="checkbox" label="Delete All" data-scope="Delete_ALL" data-objectaccesstype="deleteAccess"
+                                 checked = {deleteAll}  onchange={selectOrDeselectAllPermissions}></lightning-input>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                        <div class='slds-truncate black'>
+                                <lightning-input type="checkbox" label="View All" data-scope="view_ALL" data-objectaccesstype="viewAllAccess"
+                                checked = {viewAll}   onchange={selectOrDeselectAllPermissions}></lightning-input>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                          <div class='slds-truncate  black'>
+                                <lightning-input type="checkbox" label="Modify All" data-scope="Modify_ALL" data-objectaccesstype="modifyAllAccess"
+                                checked = {modifyAll}   onchange={selectOrDeselectAllPermissions}></lightning-input>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                        <div class='slds-truncate black'>
+							<lightning-icon icon-name="utility:undo" size="x-small"
+							data-scope="REVERT" onclick={selectOrDeselectAllPermissions}> </lightning-icon> 
+                        </div>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+
+    
+                            
+       <div class="slds-theme_default slds-p-bottom_medium" style="max-height: 26rem; overflow: auto;"> 
+            <table class="slds-table slds-box slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="border-collapse: collapse;">
+                <thead>
+                   
+                    <tr style="position: sticky; z-index: 1; background-color: white; outline: 1px solid #000; top: 0;">
+                        <th>
+                            <div class='slds-truncate slds-text-heading_small slds-align_absolute-center' style="color:rgba(17, 0, 255, 0.795)">
+                                <b>Proifiles and Permissions</b>
+                            </div>
+                        </th>
+                        <th>
+                            <div class='slds-truncate slds-text-heading_small slds-align_absolute-center' style="color:rgba(17, 0, 255, 0.795)">
+                                <b>Record Types</b>
+                            </div>
+                        </th>
+
+                      
+                        <th class="slds-text-heading_small" colspan="6" scope='colgroup'>
+                            <div class="slds-truncate slds-align_absolute-center blue" title="Object Permissions" style="color:rgba(17, 0, 255, 0.795)">Object
+                                Permissions</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={tableData} for:item="eachProfile">
+                        <tr key={eachProfile.profileName}>
+                            <td>
+                                {eachProfile.profileName}
+                            </td>
+                            <td>
+                                <table class="slds-table slds-box slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="border-collapse: collapse;">
+                                    <thead>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Type</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Assigned</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Default</b>
+                                            </div>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={eachProfile.recordTypeAccess} for:each={eachProfile.recordTypeAccess} for:item="eachRecordType">
+                                            <tr key={eachRecordType.name}>
+                                                <td>
+                                                    {eachRecordType.labelName}
+                                                    
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName}
+                                                            data-objectaccesstype="available" checked={eachRecordType.available} data-scope="Assigned"
+                                                            data-parentid={eachRecordType.parentId} data-type={eachRecordType.type}
+                                                            data-recordtypename={eachRecordType.name}
+                                                            onchange={selectDiselectObjectPermissions}></lightning-input>
+                                                    </div>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName}
+                                                            data-objectaccesstype="isDefault" checked={eachRecordType.isDefault} data-scope="Assigned"
+                                                            data-parentid={eachRecordType.parentId} data-type={eachRecordType.type}
+                                                            data-recordtypename={eachRecordType.name}  disabled={eachRecordType.isReadOnly}
+                                                            onchange={selectDiselectObjectPermissions}></lightning-input>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="top: 0px; align-items: flex-start; display: block;">
+                                <table class="slds-table slds-box slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" style="border-collapse: collapse;">
+                                    <thead>
+                                        <!-- <th>
+    
+                                        </th> -->
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Read</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Create</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Edit</b>
+                                            </div>
+                                        </th>
+                
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Delete</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>View All</b>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class='slds-truncate slds-align_absolute-center black'>
+                                                <b>Modify All</b>
+                                            </div>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={eachProfile.objectPermission} for:each={eachProfile.objectPermission} for:item="eachObjectPermission">
+                                            <tr key={eachObjectPermission.profileName}>
+                                                <!-- <td>
+                                                    {eachObjectPermission.objectName}
+                                                </td> -->
+                                                <td>
+                                                    <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" data-parentname={eachProfile.profileName} 
+                                                            data-parentid={eachObjectPermission.parentId} data-objectaccesstype="readAccess" checked={eachObjectPermission.readAccess}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                     <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName} data-parentname={eachProfile.profileName} 
+                                                            data-objectaccesstype="createAccess" checked={eachObjectPermission.createAccess}  data-parentid={eachObjectPermission.parentId}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                     <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName} data-parentname={eachProfile.profileName}
+                                                            data-objectaccesstype="editAccess" checked={eachObjectPermission.editAccess} data-parentid={eachObjectPermission.parentId}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                     <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName} data-parentname={eachProfile.profileName}
+                                                            data-objectaccesstype="deleteAccess" checked={eachObjectPermission.deleteAccess} data-parentid={eachObjectPermission.parentId}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                     <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName} data-parentname={eachProfile.profileName}
+                                                            data-objectaccesstype="viewAllAccess" checked={eachObjectPermission.viewAllAccess} data-parentid={eachObjectPermission.parentId}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                     <div class="slds-truncate slds-text-align_center">
+                                                        <lightning-input type="checkbox" variant="standard" name={eachProfile.profileName} data-parentname={eachProfile.profileName}
+                                                            data-objectaccesstype="modifyAllAccess" checked={eachObjectPermission.modifyAllAccess} data-parentid={eachObjectPermission.parentId}
+                                                            onchange={selectDiselectObjectPermissions} data-objectid={eachObjectPermission.objectPermissionId}></lightning-input>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <c-custom-toast auto-close-time={autoCloseTime}></c-custom-toast>
+</div>    
+    
+
+</template>

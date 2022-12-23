@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Fetch_Mass_Permission_Data</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fetch Mass Permission Data</shortDescription>
+        <value>Fetch Data</value>
+    </labels>
+    <labels>
+        <fullName>FieldAccessLabel</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field Access Label</shortDescription>
+        <value>Field Access</value>
+    </labels>
+    <labels>
+        <fullName>FieldPermissionRetrieveSuccess</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Manage Field Permission Retrieve Success</shortDescription>
+        <value>Field permission successfully retrieved</value>
+    </labels>
+    <labels>
+        <fullName>FieldPermissionSaveFailed</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field Permission Save Failed</shortDescription>
+        <value>Field Permissions Not Saved.</value>
+    </labels>
+    <labels>
+        <fullName>FieldPermissionSaveSuccess</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field Permission Save Success</shortDescription>
+        <value>Field Permissions SuccessFully Saved</value>
+    </labels>
+    <labels>
+        <fullName>Login</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Login</shortDescription>
+        <value>Login</value>
+    </labels>
+    <labels>
+        <fullName>LoginFailure</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Login Failure</shortDescription>
+        <value>Login Failed! Please Login again.</value>
+    </labels>
+    <labels>
+        <fullName>Logintodestination</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Login to destination</shortDescription>
+        <value>Please login to the destination org below</value>
+    </labels>
+    <labels>
+        <fullName>LogoutSuccess</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Logout Success</shortDescription>
+        <value>Logout successful</value>
+    </labels>
+    <labels>
+        <fullName>ManageField</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ManageFieldFetchChunk</shortDescription>
+        <value>25</value>
+    </labels>
+    <labels>
+        <fullName>Manage_Save_Changes</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Manage Save Changes</shortDescription>
+        <value>There are no changes to save</value>
+    </labels>
+    <labels>
+        <fullName>MassFieldSaveChunk</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassFieldSaveChunk</shortDescription>
+        <value>24</value>
+    </labels>
+    <labels>
+        <fullName>MassObjectFetchChunk</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassObjectFetchChunk</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MassObjectSaveChunk</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassObjectSaveChunk</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MassPermissionsSaveButton</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MassPermissionsSaveButton</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Mass_Object_Saved</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Object Saved</shortDescription>
+        <value>Changes has been saved</value>
+    </labels>
+    <labels>
+        <fullName>ObjectAccesslabel</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Object Access label</shortDescription>
+        <value>Object Access</value>
+    </labels>
+    <labels>
+        <fullName>RecordTypeSelectWarning</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record Type Select Warning</shortDescription>
+        <value>There should be atleast one default record type selected.</value>
+    </labels>
+    <labels>
+        <fullName>SelectObjectLabel</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Object Label</shortDescription>
+        <value>Select an Object</value>
+    </labels>
+    <labels>
+        <fullName>SelectObjectWarning</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Object Warning</shortDescription>
+        <value>Please Select An Object</value>
+    </labels>
+    <labels>
+        <fullName>SelectProfileandPermissionSetLabel</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SelectProfileandPermissionSetLabel</shortDescription>
+        <value>Select Profile or Permission Set</value>
+    </labels>
+    <labels>
+        <fullName>SelectProfileandPermissionSetwarning</fullName>
+        <categories>ManagePermissions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Profile and Permission Set warning</shortDescription>
+        <value>Please Select Profile/Permission Set</value>
+    </labels>
+</CustomLabels>

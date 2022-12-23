@@ -1,0 +1,102 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-08-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="fixed-header" >
+        <div class="slds-box slds-box_x-small" style="margin: 12px; font-size:x-large; color:#0176D3; background-color:#ebf1f5;">
+          <div class="slds-text-align_center"><h1><b>Manage Permissions</b></h1></div>
+           <!-- <div class="slds-text-align_center"> -->
+                <p style="color:black; font-size:small;">Mass Assign Field/Object Permissions to multiple profiles and permissionsets.</p>
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <c-cometdlwc channel="RemoteSiteCompletion__e" onmessage={messageReceived}></c-cometdlwc>
+    <c-custom-toast auto-close-time="5000"></c-custom-toast>
+    <div class="spinner">
+		<template if:true={isSpinner}>
+
+			<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+		</template>
+	</div>   
+    <div class="slds-p-around_small">
+        <template if:false={accessToken}>
+        <lightning-card>
+            <template if:true={isRemoteSiteNotCreated}>
+                <div class="slds-align_absolute-center">
+                        <b> Please wait till the org set up is complete</b>
+                </div>
+            </template>
+                <div style="width: 60%" class="slds-m-left_x-small">
+                    <template if:true={destLoginShow}>
+                        <template if:true={orgDisplayOptions}>
+                            <lightning-combobox name="login" label={labels.Logintodestination}
+                                placeholder="Select an option" options={orgDisplayOptions} onchange={handleOrgSelection}>
+                            </lightning-combobox>
+                        </template>
+        
+                        <template if:true={newOrgLogin}>
+                            <lightning-radio-group label="Type" options={OrgTypeOptions} onchange={handleOrgTypeSelection}
+                                type="radio"></lightning-radio-group>
+                        </template>
+        
+                        <br>
+                        <lightning-button variant="brand" label={labels.Login} title="Primary action" onclick={handleLogin}>
+    
+                        </lightning-button>
+                    </template>
+                </div>
+            </lightning-card>
+        </template>
+
+        <!-- <div style="width: 60%">
+            <template if:true={destLoginShow}>
+                <template if:true={orgDisplayOptions}>
+                    <lightning-combobox name="login" label={labels.Logintodestination}
+                        placeholder="Select an option" options={orgDisplayOptions} onchange={handleOrgSelection}>
+                    </lightning-combobox>
+                </template>
+
+                <template if:true={newOrgLogin}>
+                    <lightning-radio-group label="Type" options={OrgTypeOptions} onchange={handleOrgTypeSelection}
+                        type="radio"></lightning-radio-group>
+                </template>
+
+                <br>
+                <lightning-button variant="brand" label={labels.Login} title="Primary action" onclick={handleLogin}
+                    class="slds-m-left_x-small"></lightning-button>
+            </template>
+        </div> -->
+
+        <template if:true={accessToken}>
+            <lightning-card title={cardTitle}>
+                <lightning-button variant="brand" label="Logout" slot="actions" onclick={handleLogout}></lightning-button>
+                <p class="slds-p-horizontal_small">
+                    <lightning-tabset>
+                        <lightning-tab label={labels.FieldAccessLabel}>
+                            <c-lwc_-manage-field-permissions access-token={accessToken} base-url={baseUrl}
+                            base-org-type={baseOrgType}>
+                            </c-lwc_-manage-field-permissions>
+                        </lightning-tab>
+                        <lightning-tab label={labels.ObjectAccesslabel} title="2nd tab extended title">
+                            <c-lwc_-manage-object-permissions access-token={accessToken} base-url={baseUrl}
+                                base-org-type={baseOrgType}>
+                            </c-lwc_-manage-object-permissions>
+                        </lightning-tab>
+                    </lightning-tabset>
+                </p>
+            </lightning-card>
+        </template>
+    </div>
+    <div class="fixed-footer">
+        <div class="slds-box slds-box_x-small" style="margin: 12px; font-size:medium; color:#0176D3; background-color:#ebf1f5;">
+            <!-- <div class="slds-text-align_center"> -->
+                <b>Fetch Field & Object Permissions</b>
+            <!-- </div> -->
+        </div>        
+    </div>
+</template>

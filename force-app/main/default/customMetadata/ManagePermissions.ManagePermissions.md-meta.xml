@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>ManagePermissions</label>
+    <protected>false</protected>
+    <values>
+        <field>Client_Id__c</field>
+        <value xsi:type="xsd:string">3MVG9wt4IL4O5wvKYJEdusILwvXjO8OsrBocdjSpZkQvWm.odg3rXI2_VrtdvxQyDelLRdVZELcOlyhoaCfZ1</value>
+    </values>
+    <values>
+        <field>Client_Secret__c</field>
+        <value xsi:type="xsd:string">82E9149A5A14A9E70CD8F403F754F4460A9A48D4DBC1F2F49DA5E890C65AEB07</value>
+    </values>
+    <values>
+        <field>Community_URL__c</field>
+        <value xsi:type="xsd:string">https://ceptes322-dev-ed.my.salesforce.com/</value>
+    </values>
+    <values>
+        <field>Hide_Fields__c</field>
+        <value xsi:type="xsd:string">Name,LastModifiedById,RecordTypeId,Tier,Address,Name,ConsequenceOfFailure,CurrentAmount,CurrentLifecycleEndDate,CurrentMrr,CurrentQuantity,DigitalAssetStatus,ExternalIdentifier,HasLifecycleManagement,LifecycleEndDate,LifecycleStartDate,ManufactureDate,ParentId,RootAssetId,StatusReason,TotalLifecycleAmount,CaseNumber,ContactEmail,ContactFax,ContactMobile,ContactPhone,Comments,ServiceContractId,Status,IndividualId,LastCURequestDate,LastCUUpdateDate,Name,AccountId,ContractNumber,Status,OwnerId,ActivityDate,DurationInMinutes,Email,EndDateTime,EventSubtype,Phone,IsPrivate,IsReminderSet,IsRecurrence2,ServiceAppointmentId,ShowAs,StartDateTime,Subject,ActivityDateTime,NaicsCode,ChannelProgramLevelName,ChannelProgramName,Customer__c,Data_Quality_Description__c,Data_Quality_Score__c,IsCustomerPortal,IsPartner,Pending__c,Potential_Value__c,Prospect__c,Support_Plan_Start_Date__c,Uuid,CampaignImageId,CampaignMember,DB_Campaign_Tactic__c,Data_Quality_Description__c,Data_Quality_Score__c,Last_Day_of_Month__c,MilestoneStatusIcon,SlaExitDate,Company,IndividualId,Status,Name,CloseDate,ForecastCategoryName,IqScore,Pricebook2Id,StageName,AccountId,AccountNumber,ContractId,EndDate,OrderNumber,EffectiveDate,OriginalOrderId,Pricebook2Id,IsReductionOrder,Status,IsActive,Description,IsStandard,Days_Remaining__c,Data_Quality_Score__c,Attendees,IsVisibleInSelfService,CampaignId,DB_Created_Date_without_Time__c,DB_Lead_Age__c,Jigsaw,Lead_Quality_Helper__c,Lead_Quality__c,PartnerAccountId,Contribution_Level__c,Contribution_Percentage__c,Cylinder_Volume__c,DB_Competitor__c,Data_Quality_Description__c,Height__c,PartnerAccountId,Radius__c,CallDurationInSeconds,CallObject,CallDisposition,CallType,Description,CompletedDateTime,IsRecurrence,CreatedById,Email,Phone,Priority,RecurrenceInterval,IsReminderSet,RecurrenceRegeneratedType,Status,Subject,TaskSubtype,BillingCity,BillingState,BillingCountry,BillingLongitude,BillingLatitude,BillingGeocodeAccuracy,ShippingStreet,ShippingCity,ShippingState,ShippingPostalCode,ShippingCountry,ShippingLatitude,ShippingLongitude,ShippingGeocodeAccuracy,NaicsDesc,OperatingHoursId,Sic,SicDesc,DunsNumber,DandbCompanyId,</value>
+    </values>
+    <values>
+        <field>Hide_Objects__c</field>
+        <value xsi:type="xsd:string">ApexClass, ApexComponent, ApexPage, ApexTrigger, AppointmentInvitation, AppointmentInvitee, AuthorizationFormText, AuthorizationFormDataUse, AuthorizationFormConsent, AuthorizationForm, BusinessBrand, BusinessHours, CommSubscription, CommSubscriptionChannelType, CommSubscriptionConsent, CommSubscriptionTiming, ConsumptionSchedule, ContactPointAddress,ContentVersion, DandBCompany, Entitlement, FeedItem, FeedComment, FinanceTransaction, Folder, Group, GtwyProvPaymentMethodType, Holiday, Idea, IdeaComment, Image, Incident, Individual, LegalEntity, ListEmail, Location, LocationGroup, Macro, MessagingChannel, MessagingEndUser, MessagingSession, MessagingTemplate, MsgChannelLanguageKeyword, Note, OperatingHours, OperatingHoursHoliday, PartyConsent, PaymentGatewayProvider, Problem, PermissionSet, ProcessException, Profile, Promotion, PromotionMarketSegment, PromotionSegment, QuickText, Recommendation, ResourceAbsence, ReturnOrder, ReturnOrderLineItem, Seller, Shift, SkillRequirement, Solution, UserEmailPreferredPerson, UserRole, WebCart, WebLink, WebStore, WorkPlan, WorkPlanTemplateEntry, WorkStep,WorkStepTemplate</value>
+    </values>
+    <values>
+        <field>Hide_Permissions__c</field>
+        <value xsi:type="xsd:string">B2BBuyerManager,B2BBuyer,Shopper,SchedulingFacilityManagerPsl,ContactCenterAdmin,CRMUserPsl,CommerceAdmin,C2CHeadlessCMSAccessPermSet,CommerceUser,SchedulingLineAmbassadorPsl,ServiceUserPsl,ContactCenterAgent,LightningOrderManagementAgent,SlackServiceUser,B2BBuyerManager,Merchandiser,B2BBuyer,LightningOrderManagementShopper,FieldServiceMobileStandardPermSet,SecurityCommandCenterStandardPermSet,StandardEinsteinActivityCapturePsl,SalesConsoleUser,SalesUserPsl</value>
+    </values>
+    <values>
+        <field>apiversion__c</field>
+        <value xsi:type="xsd:string">v56.0</value>
+    </values>
+</CustomMetadata>

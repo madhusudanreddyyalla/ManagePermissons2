@@ -1,0 +1,76 @@
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+  }
+  .exampleHolder{
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+  }
+  .myDIV {
+    height:300px;
+    background-color:#FFFFFF;
+  }
+  .red {
+    --sds-c-checkbox-color-border-checked: #990000;
+    --sds-c-checkbox-mark-color-foreground: #0a0099;
+  }
+  .example {
+    width:100%;
+    table-layout: fixed;
+  }
+  
+  .blue{
+      color:rgba(17, 0, 255, 0.795);
+  }
+  
+   .fixTableHead {
+        overflow-y: auto;
+        height: 400px;
+      } .tableFixHead {
+          overflow-y: auto;
+          height: 100px;
+        }
+        .tableFixHead thead th {
+          position: fixed;
+          top: 0;
+          
+        }
+         
+        th,
+        td {
+          padding: 8px 16px;
+        }
+        th {
+          background: #1c0202;
+                 
+        }
+    
+      
+  th:not([scope=row]) {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    outline: 1px solid #000;
+    border: 0;
+  }
+  table {
+    height: 100%;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px;
+    font-size: 1.1em;
+  
+  }
+  thead {
+    position: relative;
+    top: 0;   
+  }
+  .tableheader{
+    background-color: grey;
+    position: sticky;
+      z-index: 1;
+  }

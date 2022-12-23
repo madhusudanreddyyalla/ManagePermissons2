@@ -1,0 +1,201 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 12-05-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+	<lightning-card variant="Narrow">
+		<div class="slds-var-m-around_xxx-small slds-var-m-*_xxx-small">
+			<lightning-layout-item size="12" small-device-size="1" medium-device-size="12" large-device-size="12">
+				<div class="custom-box">
+					<!--Dsiplay avaailable objects for selection-->
+					<template if:true={isObject}>
+						<c-multi-select-combobox options={getobj} onselect={buttonSelectObject}
+							selected-values={searchActivity} label={labels.SelectObjectLabel}></c-multi-select-combobox>
+					</template>
+				</div>
+			</lightning-layout-item>
+			<lightning-layout-item size="12" small-device-size="1" medium-device-size="12" large-device-size="12">
+				<div class="custom-box">
+					<!--Dsiplay avaailable profiles/permissionsets for selection-->
+					<template if:true={isProfile}>
+						<c-multi-select-combobox profile="true" multi-select="true"
+							options={allProfilesandPermissionset} onselect={buttonSelect}
+							selected-values={searchActivity} label={labels.SelectProfileandPermissionSetLabel}>
+						</c-multi-select-combobox>
+					</template>
+				</div>
+			</lightning-layout-item>
+		</div>
+		<br>
+		<div class="slds-grid slds-wrap">
+		<!--Fetch field permissions-->
+		<div class="slds-col">
+			<div class="slds-float_right slds-p-horizontal_small">
+				<lightning-button variant="brand" label = {labels.fetchData} title = {labels.fetchData}
+					onclick={fetchFieldPermissions}>
+				</lightning-button>
+			</div>
+		</div>
+		<!--Save field permissions-->
+		<template if:true={isdataFetched}>
+			<div class="slds-float_right slds-p-horizontal_small">
+            	<lightning-button variant="brand" label = {labels.saveData} title = {labels.saveData} 
+				onclick={savefieldPermissions} class="slds-p-left_small">
+				</lightning-button>
+			</div>
+		</template>
+	</div>
+		
+	</lightning-card>
+
+	<!-- <div class="spinner">
+		<template if:true={isSpinner}>
+			<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+		</template>
+	</div> -->
+	<!--Display field permission information-->
+	<template if:true={isFieldPermissionVisible}>
+		<div class="slds-box slds-theme_default">
+			<lightning-card variant="Narrow">
+				<div class="slds-grid slds-wrap slds-align_absolute-center">
+					<div class="slds-p-left_x-small slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+						<div class='slds-truncate black'>
+							<lightning-input type="checkbox" label="Edit All" data-scope="EDIT_ALL"
+								onchange={selectOrDeselectAllPermissions}></lightning-input>
+						</div>
+					</div>
+					<div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+						<div class='slds-truncate black'>
+							<lightning-input type="checkbox" label="Read All" data-scope="READ_ALL"
+								onchange={selectOrDeselectAllPermissions}></lightning-input>
+						</div>
+					</div>
+					<div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+						<div class='slds-truncate black'>
+							<lightning-icon icon-name="utility:undo" size="x-small" data-scope="REVERT"
+								onclick={selectOrDeselectAllPermissions}> </lightning-icon>
+						</div>
+					</div>
+				</div>
+			</lightning-card>
+
+			<div class="fixTableHead slds-p-top_xxx-small">
+				<table border="1px" width="100%" id="example"
+					class="slds-table bottommarg display nowrap slds-table--bordered slds-max-medium-table--stacked-horizontal"
+					style="width:100%">
+					<thead class="tableheader">
+						<tr class="slds-align-bottom">
+							<th>
+								<div class='slds-truncate blue'>
+									<b>Field Name</b>
+								</div>
+							</th>
+							 <th class="slds-text-heading_small" colspan="2" scope='colgroup'>
+								<div class='slds-truncate slds-align_absolute-center blue'>
+									<b> Select All</b>
+								</div>
+							</th>
+							<th>
+								<div class='slds-truncate blue'>
+									<b> Field Type</b>
+								</div>
+							</th>
+							<template for:each={selectedProfilesandPS} for:item='col'>
+								<th key={col} colspan="2" scope='colgroup'>
+									<div class='slds-truncate slds-align_absolute-center blue'>
+										<b>{col.label}</b>
+									</div>
+								</th>
+							</template>
+						</tr>
+						<tr class="slds-align-bottom">
+							
+							<th></th>
+							<th>Read</th>
+							<th>Edit</th>
+							<th></th>
+							<template for:each={selectedProfilesandPS} for:item='col'>
+								<th key={col.label}>
+									<div class="slds-truncate slds-align_absolute-center">
+										<lightning-input type="checkbox" label="Read" data-scope="READ_ALL_C"
+											data-id={col.value}  onchange={selectOrDeselectAllPermissions}>
+										</lightning-input>
+									</div>
+								</th>
+								<th key={col.label}>
+									<div class="slds-truncate slds-align_absolute-center">
+										<lightning-input type="checkbox" label="Edit" data-scope="EDIT_ALL_C"
+											data-id={col.value} onchange={selectOrDeselectAllPermissions}>
+										</lightning-input>
+									</div>
+								</th>
+							</template>
+						</tr>
+					</thead>
+
+					<tbody>
+						<template for:each={fieldPermissionsList} for:item="field">
+							<tr key={field.fieldId}>
+								<td>
+									<div class='slds-truncate'>{field.fieldlabel}</div>
+								</td>
+								
+									<td>
+										<div class="slds-truncate slds-text-align_center">
+											<lightning-input data-selected="AllRead"
+												data-fieldvalue={field.fieldApi} 
+												data-fieldlabel={field.fieldlabel} checked ={field.read}
+												value="permissionsAllRead" type="checkbox"
+												onchange={profileandPermissionfieldsUpdate}></lightning-input>
+										</div>
+									</td>
+									<td >
+										<div class="slds-truncate slds-text-align_center">
+											<lightning-input data-selected="AllEdit"
+												 data-fieldvalue={field.fieldApi} 
+												data-fieldlabel={field.fieldlabel} 
+												value="permissionsAllEdit" type="checkbox" checked ={field.edit}
+												disabled={field.restrictEdit} onchange={profileandPermissionfieldsUpdate}></lightning-input>
+										</div>
+									</td>
+								<td>
+									<div class='slds-truncate'>{field.datatype}</div>
+								</td>
+								
+								<template for:each={field.permissionList} for:item="permission">
+									<td key={permission.fieldId}>
+										<div class="slds-truncate slds-text-align_center">
+											<lightning-input id="Read" data-permissionid={permission.parentId}
+												data-permissionname={permission.name} data-fieldvalue={field.fieldApi}
+												data-fieldlabel={field.fieldlabel} data-fieldval={permission.fieldId}
+												value="permissionsRead" type="checkbox" checked={permission.read}
+												onchange={fieldUpdate}></lightning-input>
+										</div>
+									</td>
+									<td key={permission.fieldId}>
+										<div class="slds-truncate slds-text-align_center">
+											<lightning-input id="Edit" data-permissionid={permission.parentId}
+												data-permissionname={permission.name} data-fieldvalue={field.fieldApi}
+												data-fieldlabel={field.fieldlabel} data-fieldval={permission.fieldId}
+												value="permissionsEdit" type="checkbox" checked={permission.edit}
+												disabled={field.restrictEdit} onchange={fieldUpdate}></lightning-input>
+										</div>
+									</td>
+								</template>
+							</tr>
+						</template>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+	</template>
+	<!--Custom component to display toast meaages-->
+	<c-custom-toast auto-close-time= {autoCloseTime}></c-custom-toast>
+
+</template>

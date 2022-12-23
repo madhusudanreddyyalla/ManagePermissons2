@@ -1,0 +1,7 @@
+.tab-active {
+    --sds-c-tabs-scoped-color-text-active: red;
+}
+
+.THIS .slds-radio {  
+    display: inline !important;  
+}

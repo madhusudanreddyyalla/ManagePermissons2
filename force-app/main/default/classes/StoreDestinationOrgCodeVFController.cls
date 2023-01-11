@@ -108,12 +108,12 @@ public with sharing class StoreDestinationOrgCodeVFController{
     * @return       : HttpResponse 
     **/
     private static HttpResponse getToken(String baseUrl, String code){
-        List<ApexPage> AC = [select NamespacePrefix,Name from ApexPage where Name =:'StoreDestinationOrgCodeVF'];
+        List<ApexPage> ap = [select NamespacePrefix,Name from ApexPage where Name =:'StoreDestinationOrgCodeVF'];
         String apexPage='';
-        if(AC[0].NamespacePrefix != null){
-            apexPage = AC[0].NamespacePrefix+'__'+AC[0].Name; 
+        if(ap[0].NamespacePrefix != null){
+            apexPage = ap[0].NamespacePrefix+'__'+ap[0].Name; 
         }else{
-            apexPage = AC[0].Name;
+            apexPage = ap[0].Name;
         }
         Http http = new Http();
         HttpRequest req = new HttpRequest();
@@ -158,6 +158,7 @@ public with sharing class StoreDestinationOrgCodeVFController{
             
             RemoteSiteCompletion__e platformEvent = new RemoteSiteCompletion__e();
             List<Database.SaveResult> results = EventBus.publish(new List<RemoteSiteCompletion__e>{platformEvent});
+            system.debug('@@results-='+ results);
         }
 
     }

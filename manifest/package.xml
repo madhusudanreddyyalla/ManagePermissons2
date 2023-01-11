@@ -96,11 +96,7 @@
 	<types>
 		<members>Login</members>
 		<name>CustomTab</name>
-	</types>
-	<types>
-		<members>CreateRemoteSiteEvent</members>
-		<name>ApexTrigger</name>
-	</types>
+	</types>	
 	<types>
 		<members>cometd</members>
 		<name>StaticResource</name>

@@ -63,13 +63,17 @@ export default class Lwc_ManageFieldPermissions extends LightningElement {
 
 
     async connectedCallback() {
+        console.log('11111111111');
         this.isSpinner = true;
 
         await getmanagePermissionsMdt().then((result) => {
             this.managePermissionMDT = result;
-            this.hideObjects = this.managePermissionMDT.Hide_Objects__c.replaceAll(/\s/g, '').split(',');
+            console.log('result',JSON.stringify(result) );
+            // Added namespace 'CEP__' to Hide_Objects__c.
+            this.hideObjects = this.managePermissionMDT.CEP__Hide_Objects__c.replaceAll(/\s/g, '').split(',');
         }).catch((err) => {
             this.isSpinner = false;
+            console.log('2222222222');
             this.showToast('error', JSON.stringify(err));
         });
 
@@ -83,7 +87,7 @@ export default class Lwc_ManageFieldPermissions extends LightningElement {
         getRestResponse({ jsonDataStr: JSON.stringify(getAllObjectsData) })
             .then((result) => {
                 let objrecords = JSON.parse(result).records;
-
+                console.log('3333333333333');
                 for (let i = 0; i < objrecords.length; i++) {
                     objrecords = objrecords.filter(e => !this.hideObjects.includes(e.QualifiedApiName));
                     this.getobj.push({
@@ -108,11 +112,14 @@ export default class Lwc_ManageFieldPermissions extends LightningElement {
             queryString: 'query/?q=SELECT+Id,name,label,PermissionSet.Profile.Name,ProfileId+FROM+PermissionSet',
             method: 'GET',
         }
+        console.log('44444444444444444');
 
         getRestResponse({ jsonDataStr: JSON.stringify(getAllProfilePermissionSetjson) })
             .then((result) => {
                 let records = JSON.parse(result).records;
-                let hidePermissions = this.managePermissionMDT.Hide_Permissions__c.replaceAll(/\s/g, '').split(',');
+                console.log('555555555555555');
+                // Added namespace 'CEP__' to Hide_Permissions__c.
+                let hidePermissions = this.managePermissionMDT.CEP__Hide_Permissions__c.replaceAll(/\s/g, '').split(',');
 
                 for (let i = 0; i < records.length; i++) {
                     if (records[i].ProfileId != null || records[i].ProfileId != undefined) {
@@ -192,7 +199,7 @@ export default class Lwc_ManageFieldPermissions extends LightningElement {
             getRestResponse({ jsonDataStr: JSON.stringify(getObjectFields) })
                 .then((result) => {
                     let fieldsRecord = JSON.parse(result).records;
-                    this.allObjectFields = fieldsRecord.filter(e => !this.managePermissionMDT.Hide_Fields__c.includes(e.Name));
+                    this.allObjectFields = fieldsRecord.filter(e => !this.managePermissionMDT.CEP__Hide_Fields__c.includes(e.Name));
                 }).catch((err) => {
                     this.isSpinner = false;
                     this.autoCloseTime = 4000;

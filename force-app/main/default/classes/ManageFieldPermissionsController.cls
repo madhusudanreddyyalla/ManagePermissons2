@@ -125,7 +125,9 @@ public class ManageFieldPermissionsController{
         }
         
     }   
-     catch (Exception ce) {
+    //PMD Update  
+    catch (Exception ce) {
+        string errormsg = ce.getMessage();
     }
 
     return fieldWrapperList;

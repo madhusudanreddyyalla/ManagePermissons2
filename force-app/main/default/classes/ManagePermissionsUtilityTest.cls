@@ -14,7 +14,8 @@ public class ManagePermissionsUtilityTest {
             wrap.method ='GET';
           	ManagePermissionsUtility.getStringFormated(selectedObjectNames,'SobjectType');
         	String result = ManagePermissionsUtility.getRestResponse(JSON.serialize(wrap));
-        ManagePermissionsUtility.getNewOrgDetails(sessionId,baseUrl);
+        	StoreDestinationOrgCodeVFController.getNewOrgDetails(sessionId,baseUrl);
+        //ManagePermissionsUtility.getNewOrgDetails(sessionId,baseUrl);
         Test.StopTest();
     }
     

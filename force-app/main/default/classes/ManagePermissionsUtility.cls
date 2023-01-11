@@ -47,21 +47,25 @@ public with sharing class ManagePermissionsUtility{
         return response.getBody();
     }
 
+    //Start comment here
+
     /**
      * @description      : To create remote site settings from platform event records
      * @param            : eventList
      **/
+    /*
     public static void createRemoteSiteSettings(List<CreateRemoteSiteSetting__e> eventList) {
 
         for(CreateRemoteSiteSetting__e event : eventList){
             createRemoteSite(event.Record_Id__c , event.orgURL__c, event.User_Id__c);
         }
-    }    
+    } */    
 
     /**
      * @description      : To create remote site settings asynchronously
      * @param            : recordId, orgUrl, userId
      **/
+    /*
     @future(callout=true)
     public static void createRemoteSite(String recordId, String orgUrl, String userId){     
                     
@@ -88,12 +92,14 @@ public with sharing class ManagePermissionsUtility{
                 RemoteSiteCompletion__e platformEvent = new RemoteSiteCompletion__e();
                 List<Database.SaveResult> results = EventBus.publish(new List<RemoteSiteCompletion__e>{platformEvent});
             }      
-    }   
+    } 
+    */  
 
     /**
     * @description 
     * @author CEPTES | 11-30-2022 
     **/
+    /*
 	@TestVisible
     private static void getNewOrgDetails(String token, String orgUrl){
 
@@ -116,7 +122,7 @@ public with sharing class ManagePermissionsUtility{
                 orgType = orgDataMap.get('IsSandbox')?.toString()?.equalsIgnoreCase('true') ? 'Sandbox' : 'Production';
             }
         }
-    }
+    }    
 
     private static HttpResponse getRestResponse(String endpoint, string body, string method){
         HttpRequest request = new HttpRequest();
@@ -130,6 +136,8 @@ public with sharing class ManagePermissionsUtility{
         HttpResponse response = http.send(request);
         return response;
     }
+    //Comments ends here
+    */
     //Wrapper class to hold input details for making rest api call
     public class RestInputWrapper{
         public string accessToken;
@@ -149,7 +157,6 @@ public with sharing class ManagePermissionsUtility{
         if(!Test.isRunningTest()){
             sessionJson = (SessionId)JSON.deserialize(Page.ManagePermissionsSessionPage.getContent().toString(), SessionId.class);
         }
-        system.debug('@@sessionJson-='+ sessionJson);
         return sessionJson.sessionId;
     }
 

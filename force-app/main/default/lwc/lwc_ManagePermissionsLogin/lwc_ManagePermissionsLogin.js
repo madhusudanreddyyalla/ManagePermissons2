@@ -61,9 +61,11 @@ export default class Lwc_ManagePermissionsLogin extends NavigationMixin(Lightnin
                 else if (result.isActiveOrg) {
                     console.log('spinner OFF');
                     this.isSpinner = false;
-                    this.accessToken = result.activeOrg.Access_Token__c;
-                    this.baseUrl = result.activeOrg.OrgUrl__c;
-                    this.cardTitle = 'You are logged in to - ' + result.activeOrg.Org_Name__c + ' (' + this.baseUrl + ')';
+                    this.accessToken = result.activeOrg.CEP__Access_Token__c;
+                    console.log('@@accessToken >>'+this.accessToken);
+                    this.baseUrl = result.activeOrg.CEP__OrgUrl__c;
+                    console.log('@@baseUrl >>'+this.baseUrl);
+                    this.cardTitle = 'You are logged in to - ' + result.activeOrg.CEP__Org_Name__c + ' (' + this.baseUrl + ')';
                     //this.baseOrgType = result.activeOrg.OrgType__c;
                     this.destLoginShow = false;
                 } else {
@@ -102,9 +104,9 @@ export default class Lwc_ManagePermissionsLogin extends NavigationMixin(Lightnin
         })
             .then(result => {
                 if (result.isActiveOrg) {
-                    this.accessToken = result.activeOrg.Access_Token__c;
-                    this.baseUrl = result.activeOrg.OrgUrl__c;
-                    this.cardTitle = 'You are logged in to - ' + result.activeOrg.Org_Name__c + ' (' + this.baseUrl + ')';
+                    this.accessToken = result.activeOrg.CEP__Access_Token__c;
+                    this.baseUrl = result.activeOrg.CEP__OrgUrl__c;
+                    this.cardTitle = 'You are logged in to - ' + result.activeOrg.CEP__Org_Name__c + ' (' + this.baseUrl + ')';
                     //this.baseOrgType = 'Production';
                     this.destLoginShow = false;
                 } else {

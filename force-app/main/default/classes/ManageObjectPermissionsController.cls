@@ -75,14 +75,14 @@ public with sharing class ManageObjectPermissionsController{
             }
         }
         if (!permissionSetIdList.isEmpty()){
-            List<MetadataService.PermissionSet> permissionSets = new List<MetadataService.PermissionSet>();
-            if (Test.isRunningTest()){
-                permissionSets = permissionSetsFromTest;
-            } else{
-                    for(string permissionSetId:permissionSetIdList){
-                    List<MetadataService.PermissionSet> currentPermissionSet = new List<MetadataService.PermissionSet>();
+             for(string permissionSetId:permissionSetIdList){
+                List<MetadataService.PermissionSet> currentPermissionSet = new List<MetadataService.PermissionSet>();
+                if (Test.isRunningTest()){
+                    currentPermissionSet = permissionSetsFromTest;
+                } else{
                     currentPermissionSet =(List<MetadataService.PermissionSet>)service.readMetadata('PermissionSet', new List<String>{permissionSetId}).getRecords();
-                     String permissionSetName = currentPermissionSet[0].label;
+                }
+                String permissionSetName = currentPermissionSet[0].label;
                 List<RecordTypeDataWrapper> recordTypeDataList = new List<RecordTypeDataWrapper>();
                 if (currentPermissionSet[0].recordTypeVisibilities != null && !currentPermissionSet[0].recordTypeVisibilities.isEmpty()){
                     for (MetadataService.PermissionSetRecordTypeVisibility rtv : currentPermissionSet[0].recordTypeVisibilities){
@@ -101,22 +101,21 @@ public with sharing class ManageObjectPermissionsController{
                     permissionAndRecordTypeDataMap.put(permissionSetName, recordTypeDataList);
                 }
                  }
-            }
+            
         }
 
         if (!profileIdList.isEmpty()){
-            
-            List<MetadataService.Profile> profilesWithPermissionInfo = new List<MetadataService.Profile>();
-            if (Test.isRunningTest()){
-                profilesWithPermissionInfo = profilesWithPermissionInfoFromTest;
-            } else{
-                    for(string profileId : profileIdList){
-                    List<MetadataService.Profile> profileMeta = new List<MetadataService.Profile>();
+             for(string profileId : profileIdList){
+                List<MetadataService.Profile> profileMeta = new List<MetadataService.Profile>();
+                if (Test.isRunningTest()){
+                    profileMeta = profilesWithPermissionInfoFromTest;
+                } else{
                     profileMeta = (List<MetadataService.Profile>)service.readMetadata('Profile', new List<String>{profileId}).getRecords();
-                 //   profilesWithPermissionInfo.addAll(profilesWithPermission);
-                 List<RecordTypeDataWrapper> recordTypeDataList = new List<RecordTypeDataWrapper>();
+                }
+                //   profilesWithPermissionInfo.addAll(profilesWithPermission);
+                List<RecordTypeDataWrapper> recordTypeDataList = new List<RecordTypeDataWrapper>();
                 if (profileMeta[0]?.recordTypeVisibilities != null && !profileMeta[0]?.recordTypeVisibilities.isEmpty()){
-                    for (MetadataService.ProfileRecordTypeVisibility profileRecordTypeVisiblityInfo : profileMeta[0]?.recordTypeVisibilities){
+                   for (MetadataService.ProfileRecordTypeVisibility profileRecordTypeVisiblityInfo : profileMeta[0]?.recordTypeVisibilities){
                         RecordTypeDataWrapper rec = new RecordTypeDataWrapper();
                         rec.name = profileRecordTypeVisiblityInfo.recordType;
                         rec.available = profileRecordTypeVisiblityInfo.visible;
@@ -134,7 +133,7 @@ public with sharing class ManageObjectPermissionsController{
             
                     }
             
-            }
+            
         }
         return JSON.serialize(permissionAndRecordTypeDataMap);
     }

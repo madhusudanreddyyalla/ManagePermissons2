@@ -2,7 +2,10 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
+            "default": true,
+            "package": "ManagePermissionsV1",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
         },
         {
             "path": "force-app",
@@ -10,13 +13,29 @@
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
             "default": false
+        },
+        {
+            "path": "force-app",
+            "package": "ManagePermissionsV2",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
         }
     ],
     "name": "ManagePermissons",
-    "namespace": "",
+    "namespace": "CEP",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "56.0",
     "packageAliases": {
-        "ManagePermissions": "0Ho5g000000Xa5ICAS"
+        "ManagePermissions": "0Ho5g000000Xa5ICAS",
+        "ManagePermissions@0.1.0-1": "04t5g0000002cS0AAI",
+        "ManagePermissionsV2": "0Ho5g000000Xa5NCAS",
+        "ManagePermissionsV2@0.1.0-1": "04t5g0000002cS5AAI",
+        "ManagePermissionsV2@0.1.0-2": "04t5g0000002cSAAAY",
+        "ManagePermissionsV2@0.1.0-3": "04t5g0000002cSFAAY",
+        "ManagePermissionsV2@0.1.0-4": "04t5g0000002cdnAAA",
+        "ManagePermissionsV2@0.1.0-5": "04t5g0000002cf5AAA",
+        "ManagePermissionsV1": "0Ho5g000000Xa5mCAC",
+        "ManagePermissionsV1@0.1.0-1": "04t5g0000002cfUAAQ"
     }
 }

@@ -66,12 +66,16 @@ export default class RecordTypeAccessibiltyParent extends LightningElement {
   isObjectTypeRecurrsion = true;
 
   async connectedCallback() {
+    console.log('11111111111');
     this.isSpinner = true;
     await getmanagePermissionsMdt().then((result) => {
       this.managePermissionMDT = result;
-      this.hideObjects = this.managePermissionMDT.Hide_Objects__c.replaceAll(/\s/g, '').split(',');
+      console.log('result',JSON.stringify(result) );
+      // Added namespace 'CEP__' to 'Hide_Objects__c'
+      this.hideObjects = this.managePermissionMDT.CEP__Hide_Objects__c.replaceAll(/\s/g, '').split(',');
     }).catch((err) => {
       this.autoCloseTime = 6000;
+      console.log('22222222');
       this.showToast('error', JSON.stringify(err));
     });
 
@@ -87,8 +91,10 @@ export default class RecordTypeAccessibiltyParent extends LightningElement {
       .then((result) => {
         let records = [];
         records = JSON.parse(result).records;
+         
         //Remove unwanted profiles and permission sets
-        let hidePermissions = this.managePermissionMDT.Hide_Permissions__c.replaceAll(/\s/g, '').split(',');
+        //// Added namespace 'CEP__' to 'Hide_Permissions__c'
+        let hidePermissions = this.managePermissionMDT.CEP__Hide_Permissions__c.replaceAll(/\s/g, '').split(',');
         records = (hidePermissions != null && hidePermissions != undefined && hidePermissions.length > 0) ?
                   records.filter(record => !hidePermissions.includes(record.Name)) : records;
         if (records != undefined && records != null) {
@@ -139,7 +145,7 @@ export default class RecordTypeAccessibiltyParent extends LightningElement {
     getRestResponse({ jsonDataStr: JSON.stringify(getAllObjectsData) })
       .then((result) => {
         let objrecords = JSON.parse(result).records;
-
+        console.log('3333333333333');
         for (let i = 0; i < objrecords.length; i++) {
           //Remove unwanted objects
           objrecords = (this.hideObjects != null &&  this.hideObjects != undefined && this.hideObjects.length >0) ?

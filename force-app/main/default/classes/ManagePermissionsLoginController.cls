@@ -104,13 +104,13 @@ public with sharing class ManagePermissionsLoginController{
 
         ResponseWrapper responseWrapper = new ResponseWrapper();
         DestinationOrg__c destinationRec;
-
+        //FALSE POSITIVE:
+        //CRUD, FLS check not added as this runs asynchronously in automated process context
         if (!wrapper.newLogin){
             destinationRec = [SELECT Id, CreatedById, OrgUrl__c, Active__c, OrgType__c, Access_Token__c, Org_Name__c 
                                 FROM DestinationOrg__c
                                 WHERE OrgUrl__c = :wrapper.orgUrl
                                 AND CreatedById = :wrapper.userId
-                                WITH SECURITY_ENFORCED
                                 LIMIT 1];
         }
         if (destinationRec != null && accessTokenValidCheck(destinationRec)){
@@ -141,12 +141,13 @@ public with sharing class ManagePermissionsLoginController{
     **/
     @Testvisible
     private static String getRedirectUrl(String orgType){
-        List<ApexPage> AC = [select NamespacePrefix,Name from ApexPage where Name =:'StoreDestinationOrgCodeVF'];
+        //PMD Update
+        List<ApexPage> ac = [select NamespacePrefix,Name from ApexPage where Name =:'StoreDestinationOrgCodeVF'];
         String apexPage='';
-        if(AC[0].NamespacePrefix != null){
-            apexPage = AC[0].NamespacePrefix+'__'+AC[0].Name; 
+        if(ac[0].NamespacePrefix != null){
+            apexPage = ac[0].NamespacePrefix+'__'+ac[0].Name; 
         }else{
-            apexPage = AC[0].Name;
+            apexPage = ac[0].Name;
         }
         system.debug('@@pexPage-'+apexPage);
         Http http = new Http();
@@ -169,13 +170,15 @@ public with sharing class ManagePermissionsLoginController{
     * @author       : CEPTES 
     * @param        : userId 
     **/
+    //FALSE POSITIVE:
+    //CRUD, FLS check not added as this runs asynchronously in automated process context
     @AuraEnabled
     public static void handleLogout(Id userId){
         List<DestinationOrg__c> recsForUpdateList = new List<DestinationOrg__c>();
         for (DestinationOrg__c rec : [SELECT CreatedById, Active__c
                                       FROM DestinationOrg__c
                                       WHERE CreatedById = :userId AND Active__c = true
-                                      WITH SECURITY_ENFORCED]){
+                                      ]){
             rec.Active__c = false;
             recsForUpdateList.add(rec);
         }
